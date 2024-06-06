@@ -39,5 +39,5 @@ class TextComparison(models.Model):
             self.sequence_matcher = SimilarityDetails.objects.create()
         if not self.cosine_similarity:
             self.cosine_similarity = SimilarityDetails.objects.create()
-        import ipdb; ipdb.set_trace()
+
         super(TextComparison, self).save(*args, **kwargs)
