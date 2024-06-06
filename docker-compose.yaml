@@ -16,7 +16,7 @@ services:
       - 8001:8001
     # env_file is used to manage the env variables of our project
     env_file:
-      - ./.env/.dev-sample
+      - .env
     depends_on:
       - redis
       - db
@@ -42,7 +42,7 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.env/.dev-sample
+      - .env
     depends_on:
       - redis
       - db
@@ -56,7 +56,7 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.env/.dev-sample
+      - .env
     depends_on:
       - redis
       - db
@@ -70,7 +70,7 @@ services:
     volumes:
       - .:/app
     env_file:
-      - ./.env/.dev-sample
+      - .env
     ports:
       - 5557:5555
     depends_on:

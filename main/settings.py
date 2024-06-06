@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os.path
 import sys
 import environ
+from celery.schedules import crontab
 from pathlib import Path
 from corsheaders.defaults import default_headers
 
@@ -22,7 +23,7 @@ os.path.basename(os.path.dirname(BASE_DIR))
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 env = environ.Env()
-env.read_env(os.path.join(BASE_DIR, '.env', '.dev_sample'))
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DJANGOENV = os.getenv("DJANGOENV", "production")
 
@@ -100,12 +101,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": os.environ.get("SQL_ENGINE"),
+        "NAME": os.environ.get("SQL_DATABASE"),
+        "USER": os.environ.get("SQL_USER"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD"),
+        "HOST": os.environ.get("SQL_HOST"),
+        "PORT": os.environ.get("SQL_PORT"),
     }
 }
 
@@ -147,9 +148,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = env.str("DJANGO_STATIC_URL", default="/static/")
-STATIC_ROOT = env.str("DJANGO_STATIC_ROOT", default="/tmp/root/algo-trading/")
+STATIC_ROOT = env.str("DJANGO_STATIC_ROOT", default="/tmp/root/disertatie/")
 MEDIA_URL = env.str("DJANGO_MEDIA_URL", default="/media/")
-MEDIA_ROOT = env.str("DJANGO_MEDIA_ROOT", default="/tmp/media/algo-trading/")
+MEDIA_ROOT = env.str("DJANGO_MEDIA_ROOT", default="/tmp/media/disertatie/")
 MEDIA_HOST = env.str("DJANGO_MEDIA_HOST", default="http://localhost:8001")
 
 # Default primary key field type
@@ -172,11 +173,9 @@ CELERY_TASK_ROUTES = {
 }
 CELERY_TASK_ALWAYS_EAGER = env.bool("CELERY_TASK_ALWAYS_EAGER", default=False)
 
-from celery.schedules import crontab
-
 CELERY_BEAT_SCHEDULE = {
-    'Task_one_schedule': {
-        'task': 'core.tasks.send_message_check',  # name of task with path
-        'schedule': crontab(minute='*/5'),  # crontab() runs the tasks every 5 minutes
-    },
+    # 'Task_one_schedule': {
+    #     'task': 'core.tasks.send_message_check',  # name of task with path
+    #     'schedule': crontab(minute='*/5'),  # crontab() runs the tasks every 5 minutes
+    # },
 }

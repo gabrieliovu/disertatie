@@ -20,8 +20,8 @@ Includes all the basic functionality for django project + djangoui
 1. Create a virtual environment matching the Python version `python3.10 -m venv venv`
 2. Start the virtual environment: `source venv/bin/activate`
 3. Run `make requirements`
-4. Create env directory `mkdir .env && cp .env.example .env/.dev-sample`
-5. Source the env file by running `source .env/.dev-sample`
+4. Create env directory `cp .env.example .env`
+5. Source the env file by running `source .env`
 6. Run `docker compose build`
 7. Run `docker compose up` starts the docker or `docker compose up -d` starts the docker without
 the logs.

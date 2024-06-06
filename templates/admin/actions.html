@@ -429,9 +429,9 @@
                     type: 'warning'
                 })
             } else if (confirm) {
-                _vue.$confirm(confirm, '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                _vue.$confirm(confirm, 'Confirm', {
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
                     type: 'warning'
                 }).then(() => done.call(this));
 

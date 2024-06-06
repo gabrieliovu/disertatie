@@ -29,7 +29,7 @@ requirements: ## Install the requirements
 
 .PHONY: run
 run: ### Starts the development server
-	python manage.py runserver
+	python manage.py runserver --insecure
 
 .PHONY: run_plus
 run_plus: ## Starts the development server with django extensions runserver_plus
@@ -37,7 +37,7 @@ run_plus: ## Starts the development server with django extensions runserver_plus
 
 .PHONY: shell
 shell: ## Starts the shell using django extensions shell_plus
-	python manage.py shell_plus
+	python manage.py shell
 
 .PHONY: show_urls
 show_urls: ## Shows the available urls
